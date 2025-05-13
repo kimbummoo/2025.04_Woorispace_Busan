@@ -101,7 +101,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1152, y: 2048}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -424,6 +424,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: TakeScreenshot Button
       objectReference: {fileID: 0}
+    - target: {fileID: 1409584786052585006, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409584786052585006, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a636cf7f57adc4f4cab4e1fcb74d6087, type: 3}
+    - target: {fileID: 1409584786052585006, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409584786052585006, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409584786052585006, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1409584786052585006, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5113035777497093274, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -450,11 +474,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113035777497093274, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 5113035777497093274, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 120
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 5113035777497093274, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_LocalScale.x
@@ -502,7 +526,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5113035777497093274, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 104.6947
+      value: 54.6947
       objectReference: {fileID: 0}
     - target: {fileID: 5113035777497093274, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -530,6 +554,10 @@ PrefabInstance:
       objectReference: {fileID: 340340069281618868, guid: 171ed0b6e9ce2de4e8012d4e801530c6, type: 2}
     - target: {fileID: 5729594345019650032, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
       propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7406426807952452037, guid: 3c98d8aafcff88644bffec54c79a11c2, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

@@ -32,11 +32,13 @@ namespace FUTUREVISION.WebAR
                     case EScreenShotEventType.Prepare:
                         {
                             ARUIView.gameObject.SetActive(false);
+                            WebARManager.Instance.ContentViewModel.gameObject.SetActive(false);
                         }
                         break;
                     case EScreenShotEventType.Release:
                         {
                             ARUIView.gameObject.SetActive(true);
+                            WebARManager.Instance.ContentViewModel.gameObject.SetActive(true);
                         }
                         break;
                 }

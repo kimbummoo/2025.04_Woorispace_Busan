@@ -95,6 +95,23 @@ namespace FUTUREVISION
             PlayerPrefs.SetInt("ClearState6", clearState6 ? 1 : 0);
             PlayerPrefs.Save();
         }
+
+        public void ClearData()
+        {
+            clearState1 = false;
+            clearState2 = false;
+            clearState3 = false;
+            clearState4 = false;
+            clearState5 = false;
+            clearState6 = false;
+            PlayerPrefs.DeleteKey("ClearState1");
+            PlayerPrefs.DeleteKey("ClearState2");
+            PlayerPrefs.DeleteKey("ClearState3");
+            PlayerPrefs.DeleteKey("ClearState4");
+            PlayerPrefs.DeleteKey("ClearState5");
+            PlayerPrefs.DeleteKey("ClearState6");
+            PlayerPrefs.Save();
+        }
     }
 
     public class DataModel : BaseModel
@@ -135,6 +152,40 @@ namespace FUTUREVISION
                     }
                 }
             }
+        }
+
+        public void SetCorrectState(int index, bool newState)
+        {
+            switch (index)
+            {
+                case 0:
+                    ClearState.ClearState1 = newState;
+                    break;
+                case 1:
+                    ClearState.ClearState2 = newState;
+                    break;
+                case 2:
+                    ClearState.ClearState3 = newState;
+                    break;
+                case 3:
+                    ClearState.ClearState4 = newState;
+                    break;
+                case 4:
+                    ClearState.ClearState5 = newState;
+                    break;
+                case 5:
+                    ClearState.ClearState6 = newState;
+                    break;
+                default:
+                    Debug.LogWarning("Invalid index for setting clear state.");
+                    break;
+            }
+        }
+
+        [ContextMenu("Clear Data")]
+        public void ResetClearState()
+        {
+            ClearState.ClearData();
         }
     }
 }

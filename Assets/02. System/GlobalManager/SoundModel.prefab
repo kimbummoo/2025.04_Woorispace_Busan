@@ -45,6 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 339dbc522ac168040bdbf7d870f001d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ButtonAudioClip: {fileID: 8300000, guid: 9ef060dc6138e49e5bf3be0d9494e079, type: 3}
+  SucessAudioClip: {fileID: 8300000, guid: 6cd5c4836f9dd4f47a9f96f42f66ea9b, type: 3}
+  FailAudioClip: {fileID: 8300000, guid: 5620646881351ef4dab8acdd3c8bf6cf, type: 3}
   BGMPlayer: {fileID: 4669384069099981011}
 --- !u!1 &4373508660298512710
 GameObject:

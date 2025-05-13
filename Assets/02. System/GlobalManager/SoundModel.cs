@@ -20,6 +20,12 @@ namespace FUTUREVISION
         // SoundManager.Instance.PlaySound(SampleAudio);
 
 
+        public AudioClip ButtonAudioClip;
+
+        [Space(10)]
+        public AudioClip SucessAudioClip;
+        public AudioClip FailAudioClip;
+
         [Space(10)]
         [SerializeField] private AudioSource BGMPlayer;
 
@@ -69,6 +75,24 @@ namespace FUTUREVISION
             BGMPlayer.clip = clip;
             BGMPlayer.loop = true;
             BGMPlayer.Play();
+        }
+
+
+        public void PlayButtonClickSound()
+        {
+            PlaySound(ButtonAudioClip);
+        }
+
+        public void PlayMissionSound(bool isSuccess)
+        {
+            if (isSuccess)
+            {
+                PlaySound(SucessAudioClip);
+            }
+            else
+            {
+                PlaySound(FailAudioClip);
+            }
         }
     }
 }

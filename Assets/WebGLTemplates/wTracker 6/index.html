@@ -20,13 +20,12 @@
   </head>
   <body>
     <!--IMAGETARGETS-->
-
     <video id="webcam-video" muted autoplay playsinline style="width:1px;position:absolute"></video>
     <canvas id="video-canvas" style="width:100%; height:100%; object-fit:cover; position:absolute"></canvas>
     <div id="startARDiv" class="ctaDiv" style="background: #2f2e32">
       <select id="chooseCamSel" style="visibility: hidden; background: transparent; border: .05vh solid white; border-radius: max(0.5vw, 0.5vh); color:white; font-size: max(1.5vw, 1.5vh); position: absolute; bottom: 80px" 
         onchange="SelectCam()"></select>
-      <p style="text-align: center; width:min(60vw, 60vh);">당신을 위한 메세지가 도착했어요!💌</p>
+      <p style="text-align: center; width:min(60vw, 60vh);">이 증강현실 경험은 기기의 카메라와 모션 센서 권한을 필요로 합니다.</p>
       <button id="startARButton" onclick="StartAR()" style="visibility: hidden">확인하기</button>
       <br><br><br>
     </div>
@@ -57,13 +56,13 @@
         <p id="errorText" style="text-align: center; width:60vw; color:#7f3f3f; font-size: max(3vw, 3vh);"></p>
     </div>
     <div id="unity-container">
-      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
           <div id="unity-progress-bar-full"></div>
         </div>
       </div>
+      <canvas id="unity-canvas" width={{{ WIDTH }}} height={{{ HEIGHT }}} tabindex="-1"></canvas>
       <div id="unity-warning"> </div>
     </div>
     <script src="arcamera.js" type="text/javascript"></script>
@@ -227,7 +226,9 @@
 
       window.WEBCAM_SETTINGS = {
           video: {
-              facingMode: unityFacingMode,
+              facingMode: unityFacingMode,    
+              width:  { ideal: 1920 },                // 또는 { exact: 1920 } 로 강제
+              height: { ideal: 1080 },
           },
           audio: false
       };
@@ -237,7 +238,11 @@
         window.unityFacingMode = facingMode;
 
         window.WEBCAM_SETTINGS = {
-          video: { facingMode: unityFacingMode, },
+          video: {
+              facingMode: unityFacingMode,    
+              width:  { ideal: 1920 },                // 또는 { exact: 1920 } 로 강제
+              height: { ideal: 1080 },
+          },
           audio: false
         };
 

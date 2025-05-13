@@ -29,10 +29,21 @@ namespace FUTUREVISION.WebAR
         {
             base.Initialize();
 
-            SwitchCameraButton.Button.onClick.AddListener(() => GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, SwitchCameraButton.Button)));
-            PlaceButton.Button.onClick.AddListener(() => GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, PlaceButton.Button)));
+            SwitchCameraButton.Button.onClick.AddListener(() =>
+            {
+                GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, SwitchCameraButton.Button));
+                GlobalManager.Instance.SoundModel.PlayButtonClickSound();
+            });
+            PlaceButton.Button.onClick.AddListener(() =>
+            {
+                GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, PlaceButton.Button));
+                GlobalManager.Instance.SoundModel.PlayButtonClickSound();
+            });
             TakeScreenshotButton.Button.onClick.AddListener(() => GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, TakeScreenshotButton.Button)));
-            SwitchARButton.Button.onClick.AddListener(() => GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, SwitchARButton.Button)));
+            SwitchARButton.Button.onClick.AddListener(() => {
+                GlobalManager.Instance.StartCoroutine(DelayButton(1.0f, SwitchARButton.Button));
+                GlobalManager.Instance.SoundModel.PlayButtonClickSound();
+            });
         }
 
         public void SetActivePlacedButton(bool isPlaced)

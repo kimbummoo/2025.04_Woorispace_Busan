@@ -22,7 +22,7 @@ namespace FUTUREVISION.WebAR
             base.Initialize();
 
             // 초기화
-            SetCurrentObject(0);
+            SetCurrentObject(GlobalManager.Instance.DataModel.Step);
         }
 
         protected virtual void Update()
