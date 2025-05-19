@@ -29,6 +29,7 @@ namespace FUTUREVISION.Content
         [SerializeField] protected MissionCompletePopup MissionCompletePopup;
 
         private ContentState currentState = ContentState.None;
+        public ContentState CurrentState => currentState;
 
         public virtual void Initialize()
         {
@@ -89,24 +90,15 @@ namespace FUTUREVISION.Content
             }
         }
 
-        public void ShowGuide(bool newActive, string text = null)
+        public void ShowGuide(bool newActive/*, string text = null*/)
         {
-            GuidePopup.gameObject.SetActive(newActive);
-
-            if (text != null)
-            {
-                GuidePopup.ShowGuide(text);
-            }
+            string text = GlobalManager.Instance.DataModel.GetGuideText();
+            GuidePopup.ShowGuide(newActive, text);
         }
 
         public void ShowMissionComplete(bool newActive, string text = null)
         {
-            MissionCompletePopup.gameObject.SetActive(newActive);
-
-            if (text != null)
-            {
-                MissionCompletePopup.ShowGuide(text);
-            }
+            MissionCompletePopup.ShowGuide(newActive, text);
         }
 
         public void ShowBingoPanel(bool newState)

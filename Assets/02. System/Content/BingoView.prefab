@@ -531,6 +531,81 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3
+--- !u!1 &3453609335430431578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8151845395390577334}
+  - component: {fileID: 2521082684780506958}
+  - component: {fileID: 5404906382528543595}
+  m_Layer: 5
+  m_Name: Guide Icon Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8151845395390577334
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453609335430431578}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6012948549417717483}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 342, y: 478}
+  m_SizeDelta: {x: 289.4048, y: 175.2256}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2521082684780506958
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453609335430431578}
+  m_CullTransparentMesh: 1
+--- !u!114 &5404906382528543595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3453609335430431578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.29803923}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 767d2ba59c4c01446b25ad172e09c6bf, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3832875747109202236
 GameObject:
   m_ObjectHideFlags: 0
@@ -738,8 +813,8 @@ MonoBehaviour:
   OpenBingoButton: {fileID: 3243533866405177742}
   CloseBingoButton: {fileID: 7434088121604442686}
   Bingo1: {fileID: 3849449023289348489}
-  Bingo2: {fileID: 4794468429018354222}
-  Bingo3: {fileID: 7583063932206850903}
+  Bingo2: {fileID: 7583063932206850903}
+  Bingo3: {fileID: 4794468429018354222}
   Bingo4: {fileID: 4912549099127375162}
   Bingo5: {fileID: 4099437804532259311}
   Bingo6: {fileID: 9121230184141391848}
@@ -990,6 +1065,7 @@ RectTransform:
   m_Children:
   - {fileID: 8819695280180566764}
   - {fileID: 6369146242581117222}
+  - {fileID: 8151845395390577334}
   - {fileID: 5069592042154826993}
   - {fileID: 4368698630933628363}
   - {fileID: 3172598822719460004}
@@ -1101,7 +1177,7 @@ GameObject:
   - component: {fileID: 5332008511475832270}
   - component: {fileID: 2992373342742868617}
   m_Layer: 5
-  m_Name: 2 Content Image
+  m_Name: 3 Content Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1749,7 +1825,7 @@ GameObject:
   - component: {fileID: 1641168024609050251}
   - component: {fileID: 5314680996730091453}
   m_Layer: 5
-  m_Name: 3 Content Image
+  m_Name: 2 Content Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

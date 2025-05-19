@@ -42,9 +42,6 @@ namespace FUTUREVISION.WebAR
         public CameraState StartCameraState = CameraState.Back;
         public ARTrackerState StartObjectState = ARTrackerState.ScreenState;
 
-        //[Space]
-        private bool isFirstFind = false;
-
         public override void Initialize()
         {
             base.Initialize();
@@ -55,7 +52,15 @@ namespace FUTUREVISION.WebAR
                 // 카메라 권한 요청 후 초기화
                 InitializeWebAR();
 
-                ContentViewModel.SetContentState(ContentState.Quiz);
+                if (GlobalManager.Instance.DataModel.IsOpenBingo)
+                {
+                    ContentViewModel.SetContentState(ContentState.Bingo);
+                    ContentViewModel.ShowBingoPanel(true);
+                }
+                else
+                {
+                    ContentViewModel.SetContentState(ContentState.Quiz);
+                }
             }));
         }
 
@@ -87,17 +92,31 @@ namespace FUTUREVISION.WebAR
                 });
             }
 
+            yield return new WaitForSeconds(1.5f);
             action?.Invoke();
 
+            // 카메라 권한 요청 후 카메라 초기화
+            ARTrackerModel.gameObject.SetActive(true);
             if (IsAutomaticPlacement)
             {
                 ARTrackerModel.ResetPlacement();
-                yield return new WaitForSeconds(1.5f);
                 ARTrackerModel.SetPlacement();
             }
         }
 
         #region Content
+
+        public void EndGuide()
+        {
+            StartCoroutine(EndGuideCoroutine());
+        }
+
+        public IEnumerator EndGuideCoroutine()
+        {
+            yield return new WaitForSeconds(2.0f);
+
+            ContentViewModel.ShowGuide(false);
+        }
 
         public void EndFindARObject()
         {
@@ -108,7 +127,7 @@ namespace FUTUREVISION.WebAR
 
         private IEnumerator WaitForMissionComplete()
         {
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(2.0f);
             ContentViewModel.SetContentState(Content.ContentState.Bingo);
             ContentViewModel.ShowBingoPanel(true);
         }

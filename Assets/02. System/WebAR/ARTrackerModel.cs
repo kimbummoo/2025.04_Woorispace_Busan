@@ -57,21 +57,6 @@ namespace FUTUREVISION.WebAR
         public override void Initialize()
         {
             base.Initialize();
-
-            // WorldTracker 초기화
-            StartCoroutine(WaitForCameraPermission());
-        }
-
-        public IEnumerator WaitForCameraPermission()
-        {
-            Application.RequestUserAuthorization(UserAuthorization.WebCam);
-
-            yield return new WaitUntil(() =>
-            {
-                return Application.HasUserAuthorization(UserAuthorization.WebCam);
-            });
-            yield return new WaitForSeconds(1.5f);
-            WorldTracker.gameObject.SetActive(true);
         }
 
         public void SetCameraState(CameraState state)
@@ -94,7 +79,7 @@ namespace FUTUREVISION.WebAR
                     }
                     break;
             }
-            StartCoroutine(RestartCamera(settingParam));
+            WebARManager.Instance.StartCoroutine(RestartCamera(settingParam));
         }
 
         IEnumerator RestartCamera(string settingParam)
@@ -143,12 +128,6 @@ namespace FUTUREVISION.WebAR
                     // 오브젝트 전환
                     ScreenObject.SetActive(false);
                     WorldObject.SetActive(true);
-
-                    if (WebARManager.Instance.IsAutomaticPlacement)
-                    {
-                        // 1.5초 뒤에 자동으로 배치되도록 합니다.
-                        StartCoroutine(DelayResetCoroutine());
-                    }
                     break;
             }
 
@@ -193,16 +172,6 @@ namespace FUTUREVISION.WebAR
         #endregion
 
         #region WorldTracker 제어
-
-        /// <summary>
-        /// 자동 배치를 위한 코루틴, 1.5초 뒤에 배치합니다.
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerator DelayResetCoroutine()
-        {
-            yield return new WaitForSeconds(1.5f);
-            WorldTracker.PlaceOrigin();
-        }
 
         public bool GetPlacementVisibility()
         {

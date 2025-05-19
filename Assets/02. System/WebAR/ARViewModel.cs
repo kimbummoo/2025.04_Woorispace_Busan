@@ -26,7 +26,10 @@ namespace FUTUREVISION.WebAR
 
             // AR 오브젝트 터치시
             ARObjectView.OnClickObjectItem.AddListener(() => {
-                WebARManager.Instance.EndFindARObject();
+                if (WebARManager.Instance.ContentViewModel.CurrentState == Content.ContentState.Finding)
+                {
+                    WebARManager.Instance.EndFindARObject();
+                }
             });
 
             // Callback Bindings

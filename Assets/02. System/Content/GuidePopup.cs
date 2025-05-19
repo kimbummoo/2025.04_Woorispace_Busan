@@ -19,22 +19,30 @@ namespace FUTUREVISION.WebAR
 
         public virtual void Initialize()
         {
-            GuideText.Button.onClick.AddListener(() =>
-            {
-                // 팝업 닫기
-                gameObject.SetActive(false);
+            //GuideText.Button.onClick.AddListener(() =>
+            //{
+            //    // 팝업 닫기
+            //    gameObject.SetActive(false);
 
-                GlobalManager.Instance.SoundModel.PlayButtonClickSound();
-            });
+            //    GlobalManager.Instance.SoundModel.PlayButtonClickSound();
+            //});
         }
 
-        public void ShowGuide(string text)
+        public void ShowGuide(bool newActive, string text = null)
         {
             // 팝업 열기
-            gameObject.SetActive(true);
+            gameObject.SetActive(newActive);
 
             // 텍스트 설정
-            GuideText.Text.text = text;
+            if (text != null)
+            {
+                GuideText.Text.text = text;
+            }
+
+            if (newActive == true)
+            {
+                WebARManager.Instance.EndGuide();
+            }
         }
     }
 }

@@ -119,12 +119,20 @@ namespace FUTUREVISION
         public Dictionary<string, string> Parameters = new Dictionary<string, string>();
 
         public int Step = 0;
+        public bool IsOpenBingo = false;
         public ClearState ClearState = new ClearState();
 
         public override void Initialize()
         {
             InitializeParameters();
             Step = Parameters.ContainsKey("step") ? int.Parse(Parameters["step"]) : Step;
+            string mode = Parameters.ContainsKey("mode") ? Parameters["mode"] : "";
+            switch (mode)
+            {
+                case "bingo":
+                    IsOpenBingo = true;
+                    break;
+            }
 
             ClearState.LoadData();
         }
@@ -186,6 +194,27 @@ namespace FUTUREVISION
         public void ResetClearState()
         {
             ClearState.ClearData();
+        }
+
+        public string GetGuideText()
+        {
+            switch (Step)
+            {
+                case 0:
+                    return "용숙의 일기장 AR을 찾아보세요!";
+                case 1:
+                    return "짱구 왕사슴벌레 AR을 찾아보세요!";
+                case 2:
+                    return "황금매미 AR을 찾아보세요!";
+                case 3:
+                    return "버섯 옷을 입은 AR 짱구를 찾아보세요!";
+                case 4:
+                    return "야끼소바 AR을 찾아보세요!";
+                case 5:
+                    return "별똥별 AR을 찾아보세요!";
+                default:
+                    return "";
+            }
         }
     }
 }
