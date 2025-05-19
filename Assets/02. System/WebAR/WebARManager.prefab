@@ -51,9 +51,9 @@ MonoBehaviour:
   ARViewModel: {fileID: 6733323404606093137}
   ContentViewModel: {fileID: 7788245513678374081}
   RenderTexture: {fileID: 8400000, guid: 1bc87c1e558a2a946b0068ec2dec894f, type: 2}
-  IsAutomaticPlacement: 0
+  IsAutomaticPlacement: 1
   StartCameraState: 2
-  StartObjectState: 1
+  StartObjectState: 2
 --- !u!1001 &775539732257712228
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,16 +10,115 @@ using UnityEngine;
 
 namespace FUTUREVISION.Content
 {
+    public enum ContentState
+    {
+        None,
+        Intro,
+        Quiz,
+        Finding,
+        Bingo,
+    }
+
     public class ContentViewModel : MonoBehaviour
     {
+        [Space]
         [SerializeField] protected BingoView BingoView;
         [SerializeField] protected QuizView QuizView;
+        [SerializeField] protected IntroView IntroView;
         [SerializeField] protected GuidePopup GuidePopup;
+        [SerializeField] protected MissionCompletePopup MissionCompletePopup;
+
+        private ContentState currentState = ContentState.None;
+
         public virtual void Initialize()
         {
             BingoView.Initialize();
             QuizView.Initialize();
+            IntroView.Initialize();
             GuidePopup.Initialize();
+            MissionCompletePopup.Initialize();
+
+            ShowGuide(false);
+            ShowMissionComplete(false);
+        }
+
+        public void SetContentState(ContentState newContentState)
+        {
+            currentState = newContentState;
+
+            switch (newContentState)
+            {
+                case ContentState.Intro:
+                    BingoView.gameObject.SetActive(false);
+                    QuizView.gameObject.SetActive(false);
+                    IntroView.gameObject.SetActive(true);
+
+                    WebARManager.Instance.ARViewModel.SetActiveObjectView(false);
+                    WebARManager.Instance.ARViewModel.SetActiveUIView(false);
+                    break;
+                case ContentState.Quiz:
+                    BingoView.gameObject.SetActive(false);
+                    QuizView.gameObject.SetActive(true);
+                    IntroView.gameObject.SetActive(false);
+
+                    WebARManager.Instance.ARViewModel.SetActiveObjectView(false);
+                    WebARManager.Instance.ARViewModel.SetActiveUIView(false);
+                    break;
+                case ContentState.Finding:
+                    BingoView.gameObject.SetActive(false);
+                    QuizView.gameObject.SetActive(false);
+                    IntroView.gameObject.SetActive(false);
+
+                    ShowGuide(true);
+                    ShowMissionComplete(false);
+                    WebARManager.Instance.ARViewModel.SetActiveObjectView(true);
+                    WebARManager.Instance.ARViewModel.SetActiveUIView(false);
+                    break;
+                case ContentState.Bingo:
+                    BingoView.gameObject.SetActive(true);
+                    QuizView.gameObject.SetActive(false);
+                    IntroView.gameObject.SetActive(false);
+
+                    ShowGuide(false);
+                    ShowMissionComplete(false);
+                    WebARManager.Instance.ARViewModel.SetActiveObjectView(true);
+                    WebARManager.Instance.ARViewModel.SetActiveUIView(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void ShowGuide(bool newActive, string text = null)
+        {
+            GuidePopup.gameObject.SetActive(newActive);
+
+            if (text != null)
+            {
+                GuidePopup.ShowGuide(text);
+            }
+        }
+
+        public void ShowMissionComplete(bool newActive, string text = null)
+        {
+            MissionCompletePopup.gameObject.SetActive(newActive);
+
+            if (text != null)
+            {
+                MissionCompletePopup.ShowGuide(text);
+            }
+        }
+
+        public void ShowBingoPanel(bool newState)
+        {
+            if (newState)
+            {
+                BingoView.OpenBingo();
+            }
+            else
+            {
+                BingoView.CloseBingo();
+            }
         }
     }
 }

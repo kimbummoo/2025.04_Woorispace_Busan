@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace FUTUREVISION.WebAR
 {
@@ -14,12 +15,20 @@ namespace FUTUREVISION.WebAR
     {
         [Header("Object")]
         public GameObject ParentObject;
-        public List<GameObject> ObjectList = new List<GameObject>();
+        public List<ARObjectItem> ObjectList = new List<ARObjectItem>();
         protected int CurrentObjectIndex = 0;
+        [Space]
+        public UnityEvent OnClickObjectItem;
 
         public override void Initialize()
         {
             base.Initialize();
+
+            ObjectList.ForEach(item => {
+                item.OnClickMouseButton.AddListener(() => {
+                    OnClickObjectItem.Invoke();
+                });
+            });
 
             // 초기화
             SetCurrentObject(GlobalManager.Instance.DataModel.Step);
@@ -30,13 +39,13 @@ namespace FUTUREVISION.WebAR
             var arTrackerModel = WebARManager.Instance.ARTrackerModel;
             switch (arTrackerModel.GetARTrackerState())
             {
-                case EARTrackerState.ScreenState:
+                case ARTrackerState.ScreenState:
                     ParentObject.SetActive(true);
                     break;
-                case EARTrackerState.WorldState:
+                case ARTrackerState.WorldState:
                     ParentObject.SetActive(arTrackerModel.IsPlacement);
                     break;
-                case EARTrackerState.None:
+                case ARTrackerState.None:
                     Debug.LogWarning($"ARObjectView: 정의되지 않음");
                     break;
             }
@@ -73,7 +82,7 @@ namespace FUTUREVISION.WebAR
 
             for (int i = 0; i < ObjectList.Count; i++)
             {
-                ObjectList[i].SetActive(i == index);
+                ObjectList[i].gameObject.SetActive(i == index);
             }
         }
 

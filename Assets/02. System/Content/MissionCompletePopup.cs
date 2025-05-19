@@ -4,6 +4,7 @@
  *
  */
 
+using FUTUREVISION;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,18 +12,19 @@ using UnityEngine.Events;
 
 namespace FUTUREVISION.WebAR
 {
-    public class GuidePopup : MonoBehaviour
+    public class MissionCompletePopup : MonoBehaviour
     {
         [SerializeField] protected TextBoxUIItem GuideText;
-        //[Space(10)]
-        //public UnityEvent OnClickGuidePopup;
+        [Space(10)]
+        public UnityEvent OnClickGuidePopup;
 
         public virtual void Initialize()
         {
             GuideText.Button.onClick.AddListener(() =>
             {
-                // 팝업 닫기
-                gameObject.SetActive(false);
+                // 자동으로 넘어가도록 설정함 Manager 참고
+                //// 팝업 닫기
+                //gameObject.SetActive(false);
 
                 GlobalManager.Instance.SoundModel.PlayButtonClickSound();
             });

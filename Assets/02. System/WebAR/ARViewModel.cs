@@ -24,6 +24,11 @@ namespace FUTUREVISION.WebAR
             ARObjectView.SetCurrentObject(GlobalManager.Instance.DataModel.Step);
             ARUIView.SetActivePlacedButton(false);
 
+            // AR 오브젝트 터치시
+            ARObjectView.OnClickObjectItem.AddListener(() => {
+                WebARManager.Instance.EndFindARObject();
+            });
+
             // Callback Bindings
             WebARManager.Instance.ARTrackerModel.OnScreenShotEvent.AddListener((eventType) =>
             {
@@ -83,28 +88,28 @@ namespace FUTUREVISION.WebAR
         /// </summary>
         public void ToggleCameraState()
         {
-            ECameraState state = WebARManager.Instance.ARTrackerModel.GetCameraState();
-            ECameraState newState = ECameraState.None;
+            CameraState state = WebARManager.Instance.ARTrackerModel.GetCameraState();
+            CameraState newState = CameraState.None;
             switch (state)
             {
-                case ECameraState.Front:
-                    newState = ECameraState.Back;
+                case CameraState.Front:
+                    newState = CameraState.Back;
 
                     WebARManager.Instance.ARTrackerModel.SetARTrackerState(WebARManager.Instance.ARTrackerModel.GetARTrackerState());
                     ARUIView.SetActivePlacedButton(false);
                     ARUIView.SetActiveSwitchARButton(true);
 
                     break;
-                case ECameraState.Back:
-                    newState = ECameraState.Front;
+                case CameraState.Back:
+                    newState = CameraState.Front;
 
                     // 전면 카메라는 스크린 상태로만 이용 (AR X)
-                    WebARManager.Instance.ARTrackerModel.SetARTrackerState(EARTrackerState.ScreenState);
+                    WebARManager.Instance.ARTrackerModel.SetARTrackerState(ARTrackerState.ScreenState);
                     ARUIView.SetActivePlacedButton(false);
                     ARUIView.SetActiveSwitchARButton(false);
 
                     break;
-                case ECameraState.None:
+                case CameraState.None:
                     Debug.LogWarning("정의되지 않음");
                     break;
             }
@@ -119,19 +124,29 @@ namespace FUTUREVISION.WebAR
             var currentObjectState = WebARManager.Instance.ARTrackerModel.GetARTrackerState();
             switch (currentObjectState)
             {
-                case EARTrackerState.ScreenState:
+                case ARTrackerState.ScreenState:
                     {
-                        WebARManager.Instance.ARTrackerModel.SetARTrackerState(EARTrackerState.WorldState);
+                        WebARManager.Instance.ARTrackerModel.SetARTrackerState(ARTrackerState.WorldState);
                         ARUIView.SetActivePlacedButton(true);
                     }
                     break;
-                case EARTrackerState.WorldState:
+                case ARTrackerState.WorldState:
                     {
-                        WebARManager.Instance.ARTrackerModel.SetARTrackerState(EARTrackerState.ScreenState);
+                        WebARManager.Instance.ARTrackerModel.SetARTrackerState(ARTrackerState.ScreenState);
                         ARUIView.SetActivePlacedButton(false);
                     }
                     break;
             }
+        }
+
+        public void SetActiveObjectView(bool newState)
+        {
+            ARObjectView.gameObject.SetActive(newState);
+        }
+        
+        public void SetActiveUIView(bool newState)
+        {
+            ARUIView.gameObject.SetActive(newState);
         }
     }
 }

@@ -4,11 +4,13 @@
  */
 
 using FUTUREVISION.Content;
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace FUTUREVISION.WebAR
 {
-    public enum ECameraState
+    public enum CameraState
     {
         None,
 
@@ -16,7 +18,7 @@ namespace FUTUREVISION.WebAR
         Back,
     }
 
-    public enum EARTrackerState
+    public enum ARTrackerState
     {
         None,
         ScreenState,
@@ -37,13 +39,28 @@ namespace FUTUREVISION.WebAR
         [Tooltip("TODO: WebAR의 카메라를 자동으로 배치할지 여부")]
         public bool IsAutomaticPlacement = false;
 
-        public ECameraState StartCameraState = ECameraState.Back;
-        public EARTrackerState StartObjectState = EARTrackerState.ScreenState;
+        public CameraState StartCameraState = CameraState.Back;
+        public ARTrackerState StartObjectState = ARTrackerState.ScreenState;
+
+        //[Space]
+        private bool isFirstFind = false;
 
         public override void Initialize()
         {
             base.Initialize();
 
+            ContentViewModel.SetContentState(ContentState.Intro);
+            StartCoroutine(RequestCameraPermission(() =>
+            {
+                // 카메라 권한 요청 후 초기화
+                InitializeWebAR();
+
+                ContentViewModel.SetContentState(ContentState.Quiz);
+            }));
+        }
+
+        public void InitializeWebAR()
+        {
             ARTrackerModel.Initialize();
             ARViewModel.Initialize();
             ContentViewModel.Initialize();
@@ -51,6 +68,52 @@ namespace FUTUREVISION.WebAR
             ARTrackerModel.SetCameraState(StartCameraState);
             ARTrackerModel.SetARTrackerState(StartObjectState);
         }
+
+        public IEnumerator RequestCameraPermission(Action action)
+        {
+            Application.RequestUserAuthorization(UserAuthorization.WebCam);
+
+            // 카메라 권한 요청
+
+            if (Application.isEditor)
+            {
+                yield return new WaitForSeconds(1.0f);
+            }
+            else
+            {
+                yield return new WaitUntil(() =>
+                {
+                    return Application.HasUserAuthorization(UserAuthorization.WebCam);
+                });
+            }
+
+            action?.Invoke();
+
+            if (IsAutomaticPlacement)
+            {
+                ARTrackerModel.ResetPlacement();
+                yield return new WaitForSeconds(1.5f);
+                ARTrackerModel.SetPlacement();
+            }
+        }
+
+        #region Content
+
+        public void EndFindARObject()
+        {
+            ContentViewModel.ShowMissionComplete(true);
+
+            StartCoroutine(WaitForMissionComplete());
+        }
+
+        private IEnumerator WaitForMissionComplete()
+        {
+            yield return new WaitForSeconds(3.0f);
+            ContentViewModel.SetContentState(Content.ContentState.Bingo);
+            ContentViewModel.ShowBingoPanel(true);
+        }
+
+        #endregion
 
         //public void Update()
         //{

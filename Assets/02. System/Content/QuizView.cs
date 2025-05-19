@@ -3,6 +3,7 @@
  * 작성일: 2025.05.13
  */
 
+using FUTUREVISION.WebAR;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -80,14 +81,12 @@ namespace FUTUREVISION.Content
         public IEnumerator ShowQuizPanel(float delay, bool isCorrect)
         {
             OXPanel.SetActive(true);
-
             yield return new WaitForSeconds(delay);
-
             OXPanel.SetActive(false);
 
             if (isCorrect)
             {
-                this.gameObject.SetActive(false);
+                WebARManager.Instance.ContentViewModel.SetContentState(ContentState.Finding);
             }
         }
     }

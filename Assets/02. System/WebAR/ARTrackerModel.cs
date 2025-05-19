@@ -6,8 +6,6 @@
 
 using Imagine.WebAR;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -41,12 +39,12 @@ namespace FUTUREVISION.WebAR
 
         [Space(10)]
         [Header("State")]
-        [SerializeField] protected ECameraState CameraState;
-        [SerializeField] protected EARTrackerState ARTrackingState;
+        [SerializeField] protected CameraState CameraState;
+        [SerializeField] protected ARTrackerState ARTrackingState;
 
         [Space(10)]
         [Header("Event")]
-        public UnityEvent<EARTrackerState> OnARTrackingStateChanged;
+        public UnityEvent<ARTrackerState> OnARTrackingStateChanged;
 
         public UnityEvent OnPlaced;
         public UnityEvent OnReset;
@@ -59,21 +57,37 @@ namespace FUTUREVISION.WebAR
         public override void Initialize()
         {
             base.Initialize();
+
+            // WorldTracker 초기화
+            StartCoroutine(WaitForCameraPermission());
         }
-        public void SetCameraState(ECameraState state)
+
+        public IEnumerator WaitForCameraPermission()
+        {
+            Application.RequestUserAuthorization(UserAuthorization.WebCam);
+
+            yield return new WaitUntil(() =>
+            {
+                return Application.HasUserAuthorization(UserAuthorization.WebCam);
+            });
+            yield return new WaitForSeconds(1.5f);
+            WorldTracker.gameObject.SetActive(true);
+        }
+
+        public void SetCameraState(CameraState state)
         {
             CameraState = state;
 
             string settingParam = string.Empty;
             switch (state)
             {
-                case ECameraState.Front:
+                case CameraState.Front:
                     {
                         settingParam = "user";
                         ARCamera.isFlipped = true;
                     }
                     break;
-                case ECameraState.Back:
+                case CameraState.Back:
                     {
                         settingParam = "environment";
                         ARCamera.isFlipped = false;
@@ -93,13 +107,13 @@ namespace FUTUREVISION.WebAR
             Application.ExternalCall("StartWebcam");
         }
 
-        public void SetARTrackerState(EARTrackerState state)
+        public void SetARTrackerState(ARTrackerState state)
         {
             ARTrackingState = state;
 
             switch (ARTrackingState)
             {
-                case EARTrackerState.ScreenState:
+                case ARTrackerState.ScreenState:
                     WorldTracker.ResetOrigin();
 
                     // 카메라 전환
@@ -115,7 +129,7 @@ namespace FUTUREVISION.WebAR
                     WorldObject.SetActive(false);
                     break;
 
-                case EARTrackerState.WorldState:
+                case ARTrackerState.WorldState:
                     WorldTracker.ResetOrigin();
 
                     // 카메라 전환
@@ -153,12 +167,12 @@ namespace FUTUREVISION.WebAR
             return WorldContentsCamera;
         }
 
-        public ECameraState GetCameraState()
+        public CameraState GetCameraState()
         {
             return CameraState;
         }
 
-        public EARTrackerState GetARTrackerState()
+        public ARTrackerState GetARTrackerState()
         {
             return ARTrackingState;
         }
@@ -167,9 +181,9 @@ namespace FUTUREVISION.WebAR
         {
             switch (ARTrackingState)
             {
-                case EARTrackerState.ScreenState:
+                case ARTrackerState.ScreenState:
                     return ScreenObject;
-                case EARTrackerState.WorldState:
+                case ARTrackerState.WorldState:
                     return WorldObject;
             }
 
