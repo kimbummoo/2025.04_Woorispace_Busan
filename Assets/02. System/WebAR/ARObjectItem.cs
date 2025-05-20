@@ -23,6 +23,9 @@ namespace FUTUREVISION.WebAR
 
         private void Update()
         {
+            if (Camera.main == null)
+                return;
+
             // 항상 카메라 방향을 바라보도록 설정
             Vector3 toCamera = Camera.main.transform.position - transform.position;
             toCamera.y = 0; // y축 회전 방지

@@ -93,10 +93,13 @@ namespace FUTUREVISION.WebAR
             }
 
             yield return new WaitForSeconds(1.5f);
-            action?.Invoke();
 
             // 카메라 권한 요청 후 카메라 초기화
             ARTrackerModel.gameObject.SetActive(true);
+            action?.Invoke();
+
+            yield return new WaitForSeconds(1.5f);
+
             if (IsAutomaticPlacement)
             {
                 ARTrackerModel.ResetPlacement();
@@ -116,6 +119,7 @@ namespace FUTUREVISION.WebAR
             yield return new WaitForSeconds(2.0f);
 
             ContentViewModel.ShowGuide(false);
+            WebARManager.Instance.ARViewModel.SetActiveObjectView(true);
         }
 
         public void EndFindARObject()

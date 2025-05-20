@@ -72,7 +72,7 @@ namespace FUTUREVISION.Content
 
                     ShowGuide(true);
                     ShowMissionComplete(false);
-                    WebARManager.Instance.ARViewModel.SetActiveObjectView(true);
+                    //WebARManager.Instance.ARViewModel.SetActiveObjectView(true); // Show Guide가 끝난 후 보여줌
                     WebARManager.Instance.ARViewModel.SetActiveUIView(false);
                     break;
                 case ContentState.Bingo:

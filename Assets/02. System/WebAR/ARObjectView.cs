@@ -34,6 +34,11 @@ namespace FUTUREVISION.WebAR
             SetCurrentObject(GlobalManager.Instance.DataModel.Step);
         }
 
+        private void OnEnable()
+        {
+            Update();
+        }
+
         protected virtual void Update()
         {
             var arTrackerModel = WebARManager.Instance.ARTrackerModel;
