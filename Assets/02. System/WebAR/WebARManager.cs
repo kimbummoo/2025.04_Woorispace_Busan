@@ -127,6 +127,8 @@ namespace FUTUREVISION.WebAR
             ContentViewModel.ShowMissionComplete(true);
 
             StartCoroutine(WaitForMissionComplete());
+
+            GlobalManager.Instance.SoundModel.PlayMissionSound(true);
         }
 
         private IEnumerator WaitForMissionComplete()

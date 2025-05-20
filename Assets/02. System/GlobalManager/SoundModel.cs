@@ -25,6 +25,7 @@ namespace FUTUREVISION
         [Space(10)]
         public AudioClip SucessAudioClip;
         public AudioClip FailAudioClip;
+        public AudioClip PopupAudioClip;
 
         [Space(10)]
         [SerializeField] private AudioSource BGMPlayer;
@@ -81,6 +82,11 @@ namespace FUTUREVISION
         public void PlayButtonClickSound()
         {
             PlaySound(ButtonAudioClip);
+        }
+
+        public void PlayPopupSound()
+        {
+            PlaySound(PopupAudioClip);
         }
 
         public void PlayMissionSound(bool isSuccess)

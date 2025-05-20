@@ -64,6 +64,8 @@ namespace FUTUREVISION.Content
 
                     WebARManager.Instance.ARViewModel.SetActiveObjectView(false);
                     WebARManager.Instance.ARViewModel.SetActiveUIView(false);
+
+                    GlobalManager.Instance.SoundModel.PlayPopupSound();
                     break;
                 case ContentState.Finding:
                     BingoView.gameObject.SetActive(false);
@@ -74,6 +76,8 @@ namespace FUTUREVISION.Content
                     ShowMissionComplete(false);
                     //WebARManager.Instance.ARViewModel.SetActiveObjectView(true); // Show Guide가 끝난 후 보여줌
                     WebARManager.Instance.ARViewModel.SetActiveUIView(false);
+
+                    GlobalManager.Instance.SoundModel.PlayPopupSound();
                     break;
                 case ContentState.Bingo:
                     BingoView.gameObject.SetActive(true);
@@ -84,6 +88,8 @@ namespace FUTUREVISION.Content
                     ShowMissionComplete(false);
                     WebARManager.Instance.ARViewModel.SetActiveObjectView(true);
                     WebARManager.Instance.ARViewModel.SetActiveUIView(true);
+
+                    GlobalManager.Instance.SoundModel.PlayPopupSound();
                     break;
                 default:
                     break;
